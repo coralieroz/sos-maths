@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>SOS Maths</title>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" async></script>
+  <style>
+    body {
+      background-color: #f6f6e9;
+      margin: 0;
+      font-family: 'Arial Nova', Arial, sans-serif;
+      padding-top: 5rem;
+
+    }
+
+.top-bar {
+  background-color: #f46e16;
+  padding: 1rem;
+  text-align: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 9999;  /* Ensure it stays above everything else */
+}
+
+
+    .top-bar h1 {
+      margin: 0;
+      color: #f6f6e9;
+      font-size: 3rem;
+      font-family: Impact, sans-serif;
+    }
+
+    .content {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 2rem;
+      flex-wrap: wrap;
+    }
+    .content-2 {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 2rem;
+      margin-top: -3rem;
+      flex-wrap: wrap;
+    }
+        .content-3 {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 2rem;
+      margin-top: -4rem;
+      flex-wrap: wrap;
+      position: relative;
+      z-index: 1;
+    }
+
+    .text-box {
+      background-color: #f1e6b8;
+      padding: 1rem 1rem 0.5rem 1rem;
+      width: 75%;
+      max-width: 700px;
+      box-sizing: border-box;
+      border-radius: 0;
+      margin-right: 2rem;
+      text-align: justify;
+      position: relative;
+      z-index: 1;
+    }
+
+    .text-container {
+      display: flex;
+      flex-direction: column;
+      margin-right: 2rem;
+      max-width: 600px;
+      width: 75%;
+    }
+
+    /* ---------- wider second text box ---------- */
+    .lower-text-container {
+      display: flex;
+      flex-direction: column;
+      /* no margin-right: we want the text itself to fill the full width */
+      max-width: calc(600px + 2rem + 225px);    /* 600 (upper box width) + 2rem gap + 225 photo */
+      width: 90%;
+    }
+    .lower-text-container .text-box {
+      width: 100%;                              /* fill entire wrapper */
+      max-width: calc(600px + 2rem + 225px);
+    }
+    .lower-text-container .box-label { margin-left: 0; }
+    /* ------------------------------------------ */
+
+    .box-label {
+      display: inline-block;
+      background-color: #f46e16;
+      color: #f6f6e9;
+      font-family: Impact, sans-serif;
+      font-size: 1.2rem;
+      padding: 0.3rem 0.75rem;
+      margin-bottom: -1.3rem;
+      border-radius: 0;
+      align-self: flex-start;
+      position: relative;
+      z-index: 2;
+    }
+
+    .three-box-container {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;  /* space between boxes */
+  max-width: calc(600px + 2rem + 225px);
+  width: 90%;
+  margin: 2rem auto;
+}
+
+.three-box {
+  background-color: #f1e6b8;
+  padding: 1rem 1rem 0.5rem 1rem;
+  flex: 1;
+  text-align: justify;
+  box-sizing: border-box;
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  margin-top: 0.5rem; /* shift the whole box down to accommodate overhanging label */
+}
+
+.three-box .box-label {
+  position: absolute;
+  top: -0.7rem;
+  left: 0;
+  margin: 0;
+}
+
+
+/* Stack boxes vertically on smaller screens */
+@media (max-width: 768px) {
+  .three-box-container {
+    flex-direction: column;
+  }
+
+  .three-box {
+    width: 100%;
+  }
+}
+
+
+    .profile-image {
+      width: 225px;
+      height: 225px;
+      object-fit: cover;
+      border-radius: 50%;
+      border: 4px solid #f1e6b8;
+    }
+
+    .button-container {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      max-width: 1000px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+      flex-wrap: wrap;
+    }
+
+    .fb-button,
+    .linkedin-button,
+    .third-button {
+      display: inline-block;
+      padding: 0.75rem 1.5rem;
+      text-decoration: none;
+      font-size: 1rem;
+      border-radius: 6px;
+      font-weight: bold;
+      transition: background-color 0.3s ease;
+      color: #fff;
+    }
+
+    .fb-button { background-color: #1877f2; }
+    .fb-button:hover { background-color: #145dbf; }
+
+    .linkedin-button { background-color: #0a66c2; }
+    .linkedin-button:hover { background-color: #004182; }
+
+    .third-button { background-color: #FF6363; }
+    .third-button:hover { background-color: #D65353; }
+
+    @media (max-width: 768px) {
+      .content { flex-direction: column-reverse; align-items: center; }
+
+      .text-box,
+      .lower-text-container .text-box {
+        width: 90%;
+        margin-right: 0;
+        margin-bottom: 2rem;
+      }
+
+      .lower-text-container { width: 90%; }
+    
+      .profile-image { margin-bottom: 1rem; }
+
+      .button-container { flex-direction: column; align-items: center; gap: 1rem; }
+    }
+
+    .section-heading {
+  background-color: #f46e16;
+  color: #f6f6e9;
+  font-family: Impact, sans-serif;
+  font-size: 2rem;
+  text-align: left;
+  padding: 1rem;
+  margin: 4rem auto 1rem auto;
+  max-width: calc(600px + 2rem + 225px);
+  width: 90%;
+  box-sizing: border-box;
+  position: relative;
+  z-index: 3;
+}
+
+.section-heading h2 {
+  margin: 0;
+  font-size: 2rem;
+}
+
+.section-heading .icon {
+  font-size: 7rem;
+  margin-right: 0.5rem;
+  vertical-align: middle;
+}
+
+.heading-icon {
+  height: 2.5rem;
+  vertical-align: middle;
+  margin-left: 1.5rem;
+  margin-right:1.5rem;
+  filter: brightness(0) saturate(100%) invert(93%) sepia(4%) saturate(420%) hue-rotate(355deg) brightness(101%) contrast(99%);
+}
+
+.three-box-labels {
+  display: flex;
+  gap: 1rem;
+  max-width: calc(600px + 2rem + 225px);
+  width: 90%;
+  margin: 1rem auto -1rem auto;
+}
+
+.label-group-1 {
+  background-color: #1877f2;
+  color: #f6f6e9;
+  font-family: Impact, sans-serif;
+  font-size: 1.5rem;
+  text-align: center;
+  padding: 0.2rem;
+  box-sizing: border-box;
+}
+.label-group-2 {
+  background-color: #0a66c2;
+  color: #f6f6e9;
+  font-family: Impact, sans-serif;
+  font-size: 1.5rem;
+  text-align: center;
+  padding: 0.2rem;
+  box-sizing: border-box;
+}
+
+.secondary-label {
+  flex: 2;
+}
+
+.everyone-label {
+  flex: 1;
+}
+
+.pricing-box-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+  max-width: calc(600px + 2rem + 225px);
+  width: 90%;
+  margin: 0rem auto 2rem auto;
+}
+
+.pricing-box {
+  background-color: #f1e6b8;
+  box-sizing: border-box;
+  width: calc(25% - 0.75rem);
+  display: flex;
+  flex-direction: column;
+  border-radius: 0;
+}
+
+.pricing-banner-1 {
+  background-color: #1877f2;
+  color: #f6f6e9;
+  font-family: Impact, sans-serif;
+  font-size: 1.2rem;
+  padding: 0.5rem 1rem;
+  text-align: center;
+  box-sizing: border-box;
+  width: 100%;
+}
+.pricing-banner-2 {
+  background-color: #0a66c2;
+  color: #f6f6e9;
+  font-family: Impact, sans-serif;
+  font-size: 1.2rem;
+  padding: 0.5rem 1rem;
+  text-align: center;
+  box-sizing: border-box;
+  width: 100%;
+}
+.pricing-banner-3 {
+  background-color: #FF6363;
+  color: #f6f6e9;
+  font-family: Impact, sans-serif;
+  font-size: 1.2rem;
+  padding: 0.5rem 1rem;
+  text-align: center;
+  box-sizing: border-box;
+  width: 100%;
+}
+.pricing-banner-4 {
+  background-color: #fabb17;
+  color: #f6f6e9;
+  font-family: Impact, sans-serif;
+  font-size: 1.2rem;
+  padding: 0.5rem 1rem;
+  text-align: center;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+.pricing-content {
+  padding: 1rem;
+  text-align: justify;
+  flex: 1;
+}
+
+/* Stack vertically on mobile */
+@media (max-width: 768px) {
+  .pricing-box {
+    width: calc(50% - 0.5rem); /* Two boxes per row */
+  }
+}
+
+.footer-bar {
+  background-color: #f46e16;
+  color: #f6f6e9;
+  font-family: 'Arial Nova', Arial, sans-serif;
+  font-size: 0.8rem;
+  text-align: right;
+  padding: 0.5rem 1rem;
+  position: relative; /* not fixed — only appears at bottom */
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Toggle button */
+.animation-toggle {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  z-index: 1000;
+}
+.animation-toggle select {
+  font-family: 'Arial Nova', Arial, sans-serif;
+  font-size: 0.9rem;
+  padding: 0.2rem;
+  border-radius: 4px;
+  border: none;
+  background-color: #f46e16;
+  color: #f6f6e9;
+}
+
+/* Animation container */
+#background-animation {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: -1;
+  overflow: hidden;
+}
+
+/* Floating shapes */
+.floating-circle {
+  position: absolute;
+  border-radius: 50%;
+  opacity: 0.15;
+  animation: float 40s linear infinite;
+}
+.floating-pi {
+  position: absolute;
+  font-size: 2rem;
+  font-family: 'Arial Nova', Arial, sans-serif;
+  opacity: 0.1;
+  animation: float 35s linear infinite;
+}
+.floating-symbol {
+  position: absolute;
+  font-size: 2rem;
+  font-family: 'Arial Nova', Arial, sans-serif;
+  opacity: 0.1;
+  animation: float 35s linear infinite;
+}
+.floating-equation {
+  position: absolute;
+  opacity: 0.15;
+  animation: float 35s linear infinite;
+  pointer-events: none;
+  white-space: nowrap;
+}
+
+
+
+/* Keyframes */
+@keyframes float {
+  0% {
+    transform: translateY(100vh) scale(1);
+    opacity: 0.2;
+  }
+  50% {
+    opacity: 0.4;
+  }
+  100% {
+    transform: translateY(-20vh) scale(1.2);
+    opacity: 0;
+  }
+}
+
+
+  </style>
+</head>
+
+<body>
+<div id="background-animation"></div>
+
+  <div class="top-bar">
+    <div class="animation-toggle">
+    <select id="animationMode">
+    <option value="none">No Animation</option>
+    <option value="flares">Circles</option>
+    <option value="pis" selected>&pi;s</option>
+
+    <option value="symbols">Operations</option>
+    <option value="equations">Central Equations</option>
+    </select>
+    </div>
+    <h1><img src="alarm.png" alt="icon" class="heading-icon">SOS Maths<img src="alarm.png" alt="icon" class="heading-icon"></h1>
+  </div>
+
+  <!-- First section -->
+  <div class="content">
+    <div class="text-container">
+      <div class="box-label">PROFILE</div>
+      <div class="text-box">
+        <p>Hi! My name is Coralie, and I’m a third-year Theoretical Physics student at Trinity College Dublin. I offer <b>Maths</b> and <b>Physics</b> tutoring to secondary school students and beyond.
+        You might be preparing for an important exam year and want to boost your grades. Or perhaps you’re eager to go beyond the school curriculum and explore more advanced material. Maybe you're simply looking to improve your confidence and skills in maths for everyday, practical purposes.
+        Whatever your situation, I'm here to help with a tailored, supportive approach that suits you!</p>
+      </div>
+    </div>
+    <img src="profile-photo.JPG" alt="Profile" class="profile-image">
+  </div>
+
+  <!-- Buttons -->
+  <div class="button-container">
+    <a href="https://www.facebook.com/profile.php?id=61576368973523" target="_blank" class="fb-button">Message me on Facebook</a>
+    <a href="https://www.linkedin.com/in/coralie-elliott-wogan-69250615b?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_contact_details%3BeAa2k3kKTGyOXb0gBLBstg%3D%3D" target="_blank" class="linkedin-button">Message me on LinkedIn</a>
+    <a href="https://www.superprof.ie/theoretical-physics-student-from-trinity-college-dublin-teaches-maths-and-physics-dublin-taking-secondary-school-students.html" target="_blank" class="third-button">Message me on Superprof</a>
+  </div>
+
+  <!-- Second section -->
+  <div class="content">
+    <div class="lower-text-container">
+      <div class="box-label">ABOUT THE STUDENTS</div>
+      <div class="text-box">
+        <p>No matter whether you're interested in solo or group tutoring, I always begin with a one-on-one meeting with prospective students to discuss goals, learning preferences, and strategy. Every student has a unique learning style and individual needs, so it’s incredibly important to understand these before we begin.</p>
+        <p>For students taking part in group sessions, I also offer monthly check-ins to make sure the class is working well for you. These meetings typically last between 20 and 30 minutes and are completely free of charge.</p>
+        <p>I’m a firm believer in teaching the individual - not just the subject - so my approach is always tailored to help you build confidence, stay motivated, and make real, lasting progress.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Third section -->
+
+  <div class="section-heading">
+  <h2><img src="squiggle.png" alt="icon" class="heading-icon">WHERE DO I START?<img src="squiggle.png" alt="icon" class="heading-icon"></h2>
+  </div>
+
+<div class="course-section"></div>
+  <div class="three-box-labels">
+  <div class="label-group-1 secondary-label">Secondary-School Students</div>
+  <div class="label-group-2 everyone-label">Everyone</div>
+  </div>
+
+
+  <div class="three-box-container">
+  <div class="three-box">
+    <div class="box-label">STATE EXAM FOCUS</div>
+    <p>You’re about to enter an exam year, and while that might feel a little daunting, with the right preparation and focus, there’s every reason to believe you can absolutely thrive! With six or seven subjects on your plate, there’s no denying that next year will be busy, so why not use this summer to get a head start in maths? As one of the most time-intensive subjects, building confidence now can make a huge difference later.</p>
+    <p>In either solo or group sessions, we’ll cover material at a pace that works for you, making the content feel manageable and even enjoyable. Along the way, we’ll explore smart exam strategies and how to make the most of your time. With the right teaching, a bit of determination and a head start this summer, you’ll be ready to face those exams next June feeling confident, capable and in control!</p>
+  </div>
+  <div class="three-box">
+    <div class="box-label">ADVANCED COURSE OF STUDY</div>
+    <p>You already have an interest in maths. You’re not too worried about passing exams; maybe you’re in Transition Year and curious about what mathematics at university level is really like.</p>
+    <p>The <i>Advanced Course of Study</i> offers tutelage in subjects and areas of mathematics beyond what you might have covered in school so far.  Depending on your level, this could include university-level linear algebra, multi-variable calculus and methods for solving differential equations.  The aim is to stretch your thinking, challenge your problem-solving skills and introduce you to the beauty and depth of mathematics as is explored in higher education.</p>
+    <p>It’s perfect for students who want to deepen their understanding, explore new concepts, and develop a mathematical mindset that will serve them well in university and beyond.</p>
+  </div>
+  <div class="three-box">
+    <div class="box-label">PRACTICAL MATHS</div>
+    <p>If you’re not sure where to start but you know you want to improve your ability in mathematics, then the <i>Practical Maths</i> course is the perfect place to begin.</p>
+    <p>You might be a student unsure of how to approach the subject, or a parent looking to better support your children through their education. Maybe you’d simply like to feel more confident working with numbers so you can manage your finances more easily.</p>
+    <p>Whatever your goals are, we’ll discuss them together and build a plan that suits your needs, learning style and pace so that progress feels achievable and empowering every step of the way!</p>
+  </div>
+</div>
+
+  <div class="content-2">
+    <div class="lower-text-container">
+      <div class="box-label">PHYSICS GRINDS</div>
+      <div class="text-box">
+        <p>I also offer Leaving Cert Physics grinds for students taking/planning on taking Physics for their final years of school.  The material will depend on which areas the student feels weaker in.  The structure of these lessons will be similar to <i>State Exam Focus</i> but in Physics!</p>
+      </div>
+    </div>
+  </div>
+
+<!-- Pricing -->
+<div class="section-heading">
+  <h2><img src="price-tag.png" alt="icon" class="heading-icon">PRICING<img src="price-tag.png" alt="icon" class="heading-icon"></h2>
+</div>
+
+<div class="content-3">
+  <div class="lower-text-container">
+    <div class="text-box">
+      <p>All sessions and courses are offered through <b>English</b> and/or <b>Irish</b>.  Availability in group tutoring will depend on interest and numbers.  Below is a pricing guildline.</p>
+    </div>
+  </div>
+</div>
+
+<div class="pricing-box-container">
+  <div class="pricing-box">
+    <div class="pricing-banner-1">ONLINE GROUP<br>(4, 5, 6 STUDENTS)</div>
+    <div class="pricing-content">
+      <p>€20 per hour</p>
+    </div>
+  </div>
+
+  <div class="pricing-box">
+    <div class="pricing-banner-2">ONLINE GROUP<br>(2, 3 STUDENTS)</div>
+    <div class="pricing-content">
+      <p>€25 per hour</p>
+    </div>
+  </div>
+
+  <div class="pricing-box">
+    <div class="pricing-banner-3">ONLINE SINGLE<br>STUDENT</div>
+    <div class="pricing-content">
+      <p>€35 per hour</p>
+    </div>
+  </div>
+
+  <div class="pricing-box">
+    <div class="pricing-banner-4">IN-PERSON SINGLE<br>STUDENT</div>
+    <div class="pricing-content">
+      <p>€40 per hour</p>
+      <p>+ travel costs according to <i>Revenue's</i> 'Travel and Subsistence' </p>
+    </div>
+  </div>
+</div>
+
+<script>
+const container = document.getElementById('background-animation');
+const select = document.getElementById('animationMode');
+const colors = ['#f46e16', '#1877f2', '#0a66c2', '#FF6363', '#fabb17'];
+
+function clearAnimations() {
+  container.innerHTML = '';
+}
+
+function addFlares() {
+  for (let i = 0; i < 20; i++) {
+    const circle = document.createElement('div');
+    circle.classList.add('floating-circle');
+    const size = Math.random() * 100 + 30;
+    circle.style.width = `${size}px`;
+    circle.style.height = `${size}px`;
+    circle.style.left = `${Math.random() * 100}%`;
+    circle.style.top = `${Math.random() * 100}%`;
+    circle.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+    circle.style.animationDuration = `${30 + Math.random() * 40}s`;
+    container.appendChild(circle);
+  }
+}
+
+function addPis() {
+  for (let i = 0; i < 20; i++) {
+    const pi = document.createElement('span');
+    pi.classList.add('floating-pi');
+    pi.innerHTML = '\\(\\pi\\)';  // LaTeX format
+    pi.style.left = `${Math.random() * 100}%`;
+    pi.style.top = `${Math.random() * 100}%`;
+    pi.style.fontSize = `${Math.random() * 2 + 1}rem`;
+    pi.style.color = colors[Math.floor(Math.random() * colors.length)];
+    pi.style.animationDuration = `${30 + Math.random() * 30}s`;
+    container.appendChild(pi);
+  }
+
+  // Re-render LaTeX
+  if (window.MathJax && MathJax.typesetPromise) {
+    MathJax.typesetPromise();
+  }
+}
+
+
+function addSymbols() {
+  const symbols = ['+', '−', '×', '÷'];
+  for (let i = 0; i < 20; i++) {
+    const sym = document.createElement('span');
+    sym.classList.add('floating-symbol');
+    sym.textContent = symbols[Math.floor(Math.random() * symbols.length)];
+    sym.style.left = `${Math.random() * 100}%`;
+    sym.style.top = `${Math.random() * 100}%`;
+    sym.style.fontSize = `${Math.random() * 2 + 1}rem`;
+    sym.style.color = colors[Math.floor(Math.random() * colors.length)];
+    sym.style.animationDuration = `${30 + Math.random() * 30}s`;
+    container.appendChild(sym);
+  }
+}
+
+function addEquations() {
+  const equations = [
+    '\\(E^2 = p^2c^2 + m^2c^4\\)',
+    '\\(dU = TdS - PdV + \\mu dN\\)',
+    '\\(\\hat{H}\\Psi = E\\Psi\\)',
+    '\\(G_{\\mu\\nu} = \\frac{8\\pi G}{c^4} T_{\\mu\\nu}\\)',
+    '\\(\\frac{\\partial \\rho}{\\partial t} + \\nabla \\cdot \\vec{j} = 0\\)'
+  ];
+
+  for (let i = 0; i < equations.length; i++) {
+    const eq = document.createElement('div');
+    eq.classList.add('floating-equation');
+    eq.innerHTML = equations[i];
+
+    // Safe horizontal range (5% to 85%)
+    const safeLeft = 1 + Math.random() * 86;
+    eq.style.left = `${safeLeft}%`;
+
+    eq.style.top = `${Math.random() * 100}%`;
+    eq.style.fontSize = `${Math.random() * 1 + 1.2}rem`;
+    eq.style.color = colors[Math.floor(Math.random() * colors.length)];
+    eq.style.animationDuration = `${30 + Math.random() * 30}s`;
+    container.appendChild(eq);
+  }
+
+  if (window.MathJax && MathJax.typesetPromise) {
+    MathJax.typesetPromise();
+  }
+}
+
+
+
+
+function runSelectedAnimation(mode) {
+  if (mode === 'flares') addFlares();
+  else if (mode === 'pis') addPis();
+  else if (mode === 'symbols') addSymbols();
+  else if (mode === 'equations') addEquations();
+}
+
+select.addEventListener('change', () => {
+  clearAnimations();
+  runSelectedAnimation(select.value);
+});
+
+window.addEventListener('DOMContentLoaded', () => {
+  runSelectedAnimation(select.value);
+});
+
+</script>
+
+
+</body>
+
+<footer class="footer-bar">
+  <p>Icon Attribution (in order of appearance):
+  <a href="https://www.flaticon.com/free-icons/sos" title="sos icons">Sos icons created by SBTS2018 - Flaticon</a>  
+  <a href="https://www.flaticon.com/free-icons/scribble" title="scribble icons">Scribble icons created by Freepik - Flaticon</a>  
+  <a href="https://www.flaticon.com/free-icons/price" title="price icons">Price icons created by Freepik - Flaticon</a></p>
+</footer>
+
+</html>
